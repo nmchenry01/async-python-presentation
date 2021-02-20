@@ -3,7 +3,7 @@
 ---
 
 <p align="center">
-  <img width="460" height="300" src="assets/python-pseudo.jpg">
+  <img width="500" height="340" src="assets/python-pseudo.jpg">
 </p>
 
 ## Who is this for?
@@ -34,12 +34,12 @@
 > These may be "outside" events such as the arrival of signals, or actions instigated by a program that take place concurrently with program execution, without the program blocking to wait for results. **-Wikipedia**
 
 <p align="center">
-  <img width="460" height="300" src="assets/maths.gif">
+  <img width="500" height="340" src="assets/maths.gif">
 </p>
 
 Well that definition is certainly a mouthful...
 
-I find the following definition a little more pragmatic:
+I find the following definition a little more pragmatic
 
 > Asynchronous programming is a form of parallel programming that allows a unit of work to run separately from the primary application thread
 
@@ -49,13 +49,27 @@ A little better, but what is "parallel programming"? Let's explore some key defi
 
 ### Parallelism
 
-This is the idea of performing multiple operations at the same time. Your computer has multiple CPUs, therefore theoretically it can (and does) do multiple things at the same time.
+This is the idea of performing multiple operations at the same time. Your computer has multiple CPUs, therefore theoretically it can (and does) do multiple things at the same time
 
-The more precise term for spreading work over a computers CPUs is **Multiprocessing**. This type of parallelism is very good in the case where you have a **CPU bound** task, or a task where the time to complete it is mainly derived from the speed at which CPU(s) can process it.
+The more precise term for spreading work over a computers CPUs is **Multiprocessing**. This type of parallelism is very good in the case where you have a **CPU bound** task, or a task where the time to complete it is mainly derived from the speed at which CPU(s) can process it
 
-Many machine learning algorithms and other mathematically intensive computations fall in to this category.
+Many machine learning algorithms and other mathematically intensive computations fall in to this category
 
-- **Concurrency** - Stuff
+### Concurrency
+
+Concurrency is very similar to parallelism, but with one important distinction. It suggests that tasks _can_ run at the same time (but don't necessarily have to)
+
+Parallelism is concurrency, but not vice versa.
+
+Programming languages like Go and C# embrace concurrency wholeheartedly, and can take advantage of multiple CPU cores (multiprocessing)
+
+Below is a visualization that always helps me differentiate the two
+
+<p align="center">
+  <img width="500" height="340" src="assets/concurrency-vs-parallelism.jpg">
+</p>
+
+<!-- - **Concurrency** - Stuff
 
 - **Threading** - Stuff
 
@@ -69,7 +83,7 @@ Introduction to a couples of key concepts here (CPUs, CPU bound, I/O bound, etc)
 
 - Concurrency
 
-- Threading
+- Threading -->
 
 ## Asyncronous Programming in Python
 
