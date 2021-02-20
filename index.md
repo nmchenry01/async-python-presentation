@@ -8,7 +8,7 @@
 
 ## Who is this for?
 
-- Anyone (technical) working with data!
+- Anyone (technical) working with Python and data!
 
 ## What will be covered?
 
@@ -19,6 +19,12 @@
 - The SQLAlchemy ORM
 
 - Asyncronous SQLAlchemy
+
+## Why should I care about this?
+
+- Asyncronous programming is becomming more and more popular in the Python programming language, given the need for increased performance and to compete with other languages/runtimes that embrace the concept natively (Go, Node.js, C#, etc)
+
+- Whether you're a developer, data scientist, business analyst, etc, accessing data is a crucial part of creating impactful programs. If you use Python (and need to access data), you'll likely end up using SQLAlchemy given it's the most popular ORM (object-relational model) in the ecosystem
 
 # Introduction to Asyncronous Programming
 
