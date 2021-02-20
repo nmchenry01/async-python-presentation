@@ -31,11 +31,19 @@
 ---
 
 > **Asynchrony**, in computer programming, refers to the occurrence of events independent of the main program flow and ways to deal with such events
-> These may be "outside" events such as the arrival of signals, or actions instigated by a program that take place concurrently with program execution, without the program blocking to > wait for results. -Wikipedia
+> These may be "outside" events such as the arrival of signals, or actions instigated by a program that take place concurrently with program execution, without the program blocking to wait for results. **-Wikipedia**
 
 <p align="center">
   <img width="460" height="300" src="assets/why-dog.jpg">
 </p>
+
+Well that definition is certainly a mouthful...
+
+I find the following definition a little more pragmatic:
+
+> Asynchronous programming is a form of parallel programming that allows a unit of work to run separately from the primary application thread
+
+A little better, but what is "parallel programming"? Let's explore some key definitions we'll need to talk meaningfully about asyncronous programming.
 
 ## Key Concepts
 
