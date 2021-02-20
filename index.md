@@ -2,6 +2,8 @@
 
 ---
 
+![image](/assets/python-pseudo.jpg)
+
 ## Who is this for?
 
 - Anyone (technical) working with data!
