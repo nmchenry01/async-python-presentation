@@ -26,7 +26,7 @@
 
 - Whether you're a developer, data scientist, business analyst, etc, accessing data is a crucial part of creating impactful programs. If you use Python (and need to access data), you'll likely end up using SQLAlchemy given it's the most popular ORM (object-relational model) in the ecosystem. Did I mention the next major release of it is going async?
 
-# Introduction to asynchronous Programming
+# Introduction to Asynchronous Programming
 
 ---
 
@@ -79,7 +79,9 @@ Below is a visualization that always helps me differentiate parallelism and conc
   <img width="500" height="340" src="assets/concurrency-vs-parallelism.jpg">
 </p>
 
-## Asynchronous Programming in Python
+# Asynchronous Programming in Python
+
+---
 
 NOTE: We won't cover legacy asynchronous programming in Python, in the interest of time
 
