@@ -2,7 +2,9 @@
 
 ---
 
-![image](/assets/python-pseudo.jpg)
+<p align="center">
+  <img width="460" height="300" src="assets/python-pseudo.jpg">
+</p>
 
 ## Who is this for?
 
