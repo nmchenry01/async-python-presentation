@@ -51,7 +51,7 @@ A little better, but what is "parallel programming"? Let's explore some key defi
 
 Depending on whether you're talking about hardware or software, there are a couple different types of "threads". At a high level, we can generalize a thread as something on your computer that can do a unit of computational work
 
-- **Hardware Thread** - In theory, this is based off of the number of CPUs on your computer (IE, 4 CPUs = 4 hardware threads, or the ability for your computer to do 4 things at once). Modern CPUs embrace the concept of hyperthreading, so in practice the number of hardware threads is higher than the number of CPUs (this is outside the scope of this talk)
+- **Hardware Thread** - In theory, this is based off of the number of CPUs on your computer (IE, 4 CPUs = 4 hardware threads, or the ability for your computer to do 4 things at once). However, modern CPUs use something called "hyperthreading" so in practice the number of hardware threads is higher than the number of CPUs (this is outside the scope of this talk)
 
 - **Software/OS Thread** - Your operating system (OS) has it's own abstraction of a "thread". Your OS dispatches "work" to these threads, which in turn are run on hardware threads (the hardware thread can be thought of like the "engine" that the software thread runs on)
 
