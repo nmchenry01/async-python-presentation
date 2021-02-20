@@ -24,14 +24,18 @@
 
 - Asyncronous programming is becomming more and more popular in the Python programming language, given the need for increased performance and to compete with other languages/runtimes that embrace the concept natively (Go, Node.js, C#, etc)
 
-- Whether you're a developer, data scientist, business analyst, etc, accessing data is a crucial part of creating impactful programs. If you use Python (and need to access data), you'll likely end up using SQLAlchemy given it's the most popular ORM (object-relational model) in the ecosystem
+- Whether you're a developer, data scientist, business analyst, etc, accessing data is a crucial part of creating impactful programs. If you use Python (and need to access data), you'll likely end up using SQLAlchemy given it's the most popular ORM (object-relational model) in the ecosystem. Did I mention the next major release of it is going async?
 
 # Introduction to Asyncronous Programming
 
 ---
 
-> Asynchrony, in computer programming, refers to the occurrence of events independent of the main program flow and ways to deal with such events
+> **Asynchrony**, in computer programming, refers to the occurrence of events independent of the main program flow and ways to deal with such events
 > These may be "outside" events such as the arrival of signals, or actions instigated by a program that take place concurrently with program execution, without the program blocking to > wait for results. -Wikipedia
+
+<p align="center">
+  <img width="460" height="300" src="assets/why-dog.jpg">
+</p>
 
 ## Key Concepts
 
