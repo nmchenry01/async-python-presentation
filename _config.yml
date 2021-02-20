@@ -1,1 +1,3 @@
 theme: jekyll-theme-cayman
+title: Asynchronous Python and SQLAlchemy
+description: A brief presentation on asynchronous programming and the SQLAlchemy ORM
