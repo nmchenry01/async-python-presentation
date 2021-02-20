@@ -30,7 +30,8 @@
 
 ---
 
-Put my introduction here, why should you care about this
+> Asynchrony, in computer programming, refers to the occurrence of events independent of the main program flow and ways to deal with such events
+> These may be "outside" events such as the arrival of signals, or actions instigated by a program that take place concurrently with program execution, without the program blocking to > wait for results. -Wikipedia
 
 ## Key Concepts
 
