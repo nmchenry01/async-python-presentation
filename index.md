@@ -34,7 +34,7 @@
 > These may be "outside" events such as the arrival of signals, or actions instigated by a program that take place concurrently with program execution, without the program blocking to wait for results. **-Wikipedia**
 
 <p align="center">
-  <img width="460" height="300" src="assets/why-dog.jpg">
+  <img width="460" height="300" src="assets/maths.gif">
 </p>
 
 Well that definition is certainly a mouthful...
@@ -43,9 +43,25 @@ I find the following definition a little more pragmatic:
 
 > Asynchronous programming is a form of parallel programming that allows a unit of work to run separately from the primary application thread
 
-A little better, but what is "parallel programming"? Let's explore some key definitions we'll need to talk meaningfully about asyncronous programming.
+A little better, but what is "parallel programming"? Let's explore some key definitions we'll need to talk meaningfully about asyncronous programming
 
 ## Key Concepts
+
+### Parallelism
+
+This is the idea of performing multiple operations at the same time. Your computer has multiple CPUs, therefore theoretically it can (and does) do multiple things at the same time.
+
+The more precise term for spreading work over a computers CPUs is **Multiprocessing**. This type of parallelism is very good in the case where you have a **CPU bound** task, or a task where the time to complete it is mainly derived from the speed at which CPU(s) can process it.
+
+Many machine learning algorithms and other mathematically intensive computations fall in to this category.
+
+- **Concurrency** - Stuff
+
+- **Threading** - Stuff
+
+- **CPU Bound** - Stuff
+
+- **I/O Bound** - Stuff
 
 Introduction to a couples of key concepts here (CPUs, CPU bound, I/O bound, etc). Non-blocking
 
