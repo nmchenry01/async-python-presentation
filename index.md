@@ -63,7 +63,7 @@ Depending on whether you're talking about hardware or software, there are a coup
 
 This is the idea of performing multiple operations at the same time. Your computer has multiple CPUs and hardware threads, therefore theoretically it can (and does) do multiple things at the same time
 
-The more precise term for spreading work over a computers CPUs is `Multiprocessing`. This type of parallelism is very good in the case where you have a `CPU bound` task, or a task where the time to complete it is mainly derived from the speed at which CPU(s) can process it
+The more precise term for spreading work over a computers CPUs is **`Multiprocessing`**. This type of parallelism is very good in the case where you have a **`CPU bound`** task, or a task where the time to complete it is mainly derived from the speed at which CPU(s) can process it
 
 Many machine learning algorithms and other mathematically intensive computations fall in to this category
 
@@ -73,7 +73,7 @@ Concurrency is very similar to parallelism, but with one important distinction. 
 
 Parallelism is concurrency, but not vice versa.
 
-Many modern programming languages embrace concurrency, and it is particularly useful for addressing the inefficiences of `I/O bound` tasks. An I/O (input/output) bound task is one in which the time to complete it is mainly derived from the time spent waiting for some I/O operation to complete. Examples of these are reading from the local file system, making an HTTP request, or waiting on data from a database
+Many modern programming languages embrace concurrency, and it is particularly useful for addressing the inefficiences of **`I/O bound`** tasks. An I/O (input/output) bound task is one in which the time to complete it is mainly derived from the time spent waiting for some I/O operation to complete. Examples of these are reading from the local file system, making an HTTP request, or waiting on data from a database
 
 Below is a visualization that always helps me differentiate parallelism and concurrency
 
@@ -97,26 +97,42 @@ To cut to the chase, the top half of the below diagram illustrates (at a high le
   <img width="500" height="340" src="assets/python-concurrency.jpg">
 </p>
 
-For every Python process, only one thing can be running at any given time. This is due to the fact that Python has a construct called the `GIL`, or _Global Interpreter Lock_
+For every Python process, only one thing can be running at any given time. This is due to the fact that Python has a construct called the **`GIL`**, or _Global Interpreter Lock_
 
 The reasoning around the existence of the GIL is outside the scope of this talk, but it's contributed both to Python's success and to some of it's current limititations
 
 But what controls what gets to run at any particular time?
 
-Enter the `event loop`. The event loop can be thought of as a constantly running "while" loop that waits for asynchronous operations to return a result and the schedules them to be run by the Python interpreter.
+Enter the **`event loop`**. The event loop can be thought of as a constantly running "while" loop that waits for asynchronous operations to return a result and the schedules them to be run by the Python interpreter.
 
 <p align="center">
   <img width="500" height="340" src="assets/event-loop.png">
 </p>
 
+## Applied Python Concurrency
+
+We'll now get in to how to write concurrent code in Python. The first construct, which is at the heart of Python concurrency, is the **`coroutine`**
+
+If you're familiar with modern JavaScript, a _coroutine_ is a lot like a _promise_ (or a _future_ in Scala, a _task_ in C#, etc). For the purposes of this presentation, we'll consider it as an object that will give us a result some time in the future
+
+As a side note, a coroutine is actually a specialized generator function in Python, but this is also outside the scope of this presentation
+
+We'll start off by simply creating a coroutine
 
 
+```python
+from pprint import pprint
 
+async def something_async():
+    return "I'm not really async!"
 
+def main():
+    coroutine = something_async()
+    print(coroutine)
+    pprint(dir(coroutine))
 
-
-
-
+main()
+```
 
 
 <!-- Cover Event Loop
