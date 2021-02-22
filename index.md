@@ -155,7 +155,7 @@ def main():
 main()
 ```
 
-Well, we get back the same coroutine object we got before, which isn't really what we want (we want the `str` return value from the `something_async` function).
+Well, we get back the same coroutine object we got before, which isn't really what we want (we want the `str` return value from the `something_async` function). The program also exits before 3 seconds elapse, which isn't what we'd expect from reading the code.
 
 The way we get around this is by adding the **`await`** keyword:
 
@@ -170,7 +170,7 @@ async def something_async() -> str:
 
 async def main():
     result = await something_async()
-    
+
     print(result)
 
 asyncio.run(main())
@@ -182,7 +182,7 @@ A couple new things are happening here:
 
 - We're using **`await`** to wait on the results of several coroutines (**`asyncio.sleep`** also returns a coroutine under the hood)
 
-- We're using **`asyncio.run`** to run our top level asynchronous function (this may be deprecated in the future for a top level **`await`**)
+- We're using **`asyncio.run`** to run our top level asynchronous function (this may be deprecated in the future for a top level **`await`**). This bascially interfaces with the running event loop to make it so the program doesn't exist before all async work is done
 
 Sweet, so now we have a general idea about some of Python's async constructs and how to get some basic code to run.
 
@@ -226,31 +226,56 @@ async def main():
 asyncio.run(main())
 ```
 
-From a functionality perspective, we get the output we want here. The results of all three operations are printed to the console. However, the downside is that the entire program takes about 3 seconds to run, which is basically the same as if we were writing it in the traditional, synchronous way.
+From a functionality perspective, we get the output we want here. The results of all three operations are printed to the console.
+
+However, the downside is that the entire program takes about 3 seconds to run, which is basically the same as if we were writing it in the traditional, synchronous way.
+
+We need to be able to _schedule_ the operations to run concurrently and then wait on them to return:
+
+```python
+import asyncio
+import time
+
+async def me_first() -> str:
+    await asyncio.sleep(1)
+
+    return "I'm first!"
+
+async def me_second() -> str:
+    await asyncio.sleep(1)
+
+    return "Then me!"
+
+async def me_third() -> str:
+    await asyncio.sleep(1)
+
+    return "And finally me!"
+
+async def main():
+    start = time.perf_counter()
+
+    # Init all coroutines
+    first_coroutine = me_first()
+    second_coroutine = me_second()
+    third_coroutine = me_third()
+
+    # Schedule all coroutines to run concurrently and wait on all to return
+    result = await asyncio.gather(*[first_coroutine, second_coroutine, third_coroutine])
+
+    end = time.perf_counter()
+
+    print(f"It took {end - start} seconds to complete all operations\n")
+
+    print(result)
 
 
+asyncio.run(main())
+```
 
-<!-- Cover Event Loop
+Finally, we get what we're looking for! The overall program takes about 1 second to run, and we get the output from all of our async functions as expected.
 
+The big takeaway here is that Python can _schedule_ operations concurrently, but can't actually run them concurrently given it's single-threaded.
 
-Applied Python Concurrency
+You'll notice the program takes a couple thousandths of a second longer than a second to run. This comes from the overhead of the other parts of the program as well as the time it takes for the event loop to do it's thing. It's still way more performant than the synchronous version.
 
-Get down in to the nitty gritty, this is where code examples start
-
-* Cover coroutines
-* asyncio library
-* async/await
-
-This is due to the fact that, in Python, only one thread can hold the control of the Python interpreter at a time
-
-The process that controls this is referred to as the GIL, or `Python Global Interpreter Lock`
-
-NOTE: We won't cover legacy asynchronous programming in Python, in the interest of time
-
-- Async/await syntax (native coroutines)
-
-- Coroutine function vs coroutine object
-
-- Will skip generator based coroutines
-
-- Coroutine is a generator, but a generator is not a coroutine -->
+Notably, the Python asyncio includes a whole lot more with respect to working with concurrency. If interested, check out the docs [here](https://docs.python.org/3/library/asyncio.html) and [here](https://docs.python.org/3/library/asyncio-task.html#coroutines-and-tasks). There's a lot more to concurrency in Python than what is covered here.

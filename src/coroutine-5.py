@@ -19,17 +19,19 @@ async def me_third() -> str:
 async def main():
     start = time.perf_counter()
 
-    first_result = await me_first()
-    second_result = await me_second()
-    third_result = await me_third()
+    # Init all coroutines
+    first_coroutine = me_first()
+    second_coroutine = me_second()
+    third_coroutine = me_third()
+    
+    # Schedule all coroutines to run concurrently and wait on all to return
+    result = await asyncio.gather(*[first_coroutine, second_coroutine, third_coroutine])
 
     end = time.perf_counter()
 
     print(f"It took {end - start} seconds to complete all operations\n")
-
-    print(first_result)
-    print(second_result)
-    print(third_result)
+    
+    print(result)
 
 
 asyncio.run(main())
