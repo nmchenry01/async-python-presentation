@@ -12,13 +12,13 @@
 
 ## What will be covered?
 
-- Asynchronous Programming and Key Concepts
+- Asynchronous Programming and Key Concepts (5 minutes)
 
-- Asynchronous Programming in Python
+- Asynchronous Programming in Python (5-7 minutes)
 
-- The SQLAlchemy ORM
+- The SQLAlchemy ORM (5-7 minutes)
 
-- Asynchronous SQLAlchemy
+- Asynchronous SQLAlchemy (2-3 minutes)
 
 ## Why should I care about this?
 
@@ -81,7 +81,23 @@ Below is a visualization that always helps me differentiate parallelism and conc
 
 # Asynchronous Programming in Python
 
+Moving forward, we'll talk a little more about concurrency and asynchronous programming in the context of Python
+
+NOTE: In the interest of time, we'll skip the history and evolution of concurrency in Python. Though if you're interested, you should 100% watch this [Youtube video](https://www.youtube.com/watch?v=MCs5OvhV9S4&ab_channel=PyCon2015)
+
 ---
+
+## So How Does Python Do Concurrency?
+
+To cut to the chase, the top half of the below diagram illustrates (at a high level) how Python does concurrency
+
+<p align="center">
+  <img width="500" height="340" src="assets/python-concurrency.jpg">
+</p>
+
+This is due to the fact that, in Python, only one thread can hold the control of the Python interpreter at a time
+
+The process that controls this is referred to as the GIL, or `Python Global Interpreter Lock`
 
 NOTE: We won't cover legacy asynchronous programming in Python, in the interest of time
 
