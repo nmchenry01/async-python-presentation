@@ -119,21 +119,70 @@ As a side note, a coroutine is actually a specialized generator function in Pyth
 
 We'll start off by simply creating a coroutine
 
-
 ```python
 from pprint import pprint
 
-async def something_async():
+async def something_async() -> str:
     return "I'm not really async!"
 
 def main():
     coroutine = something_async()
-    print(coroutine)
+
+    print(f"{coroutine}\n")
     pprint(dir(coroutine))
 
 main()
 ```
 
+The takeaway here is that any function we denote as **`async`** will return a coroutine, even if nothing asynchronous is actually happening
+
+Let's try simulating something asynchronous now
+
+```python
+import asyncio
+
+async def something_async() -> str:
+    # Wait 3 seconds
+    await asyncio.sleep(3)
+
+    return "I'm async (sortof) now!"
+
+def main():
+    result = something_async()
+
+    print(result)
+
+main()
+```
+
+Well, we get back the same coroutine object we got before, which isn't really what we want (we want the `str` return value from the `something_async` function).
+
+The way we get around this is by adding the **`await`** keyword like so
+
+```python
+import asyncio
+
+async def something_async() -> str:
+    # Wait 3 seconds
+    await asyncio.sleep(3)
+
+    return "Now we're cooking with fire!"
+
+async def main():
+    result = await something_async()
+    
+    print(result)
+
+asyncio.run(main())
+```
+
+A couple new things are happening here:
+
+- We're using the `asyncio` library (Python's native async library)
+
+- We're using `await` to wait on the results of several coroutines (`asyncio.sleep` also returns a coroutine under the hood)
+
+- We're using `asyncio.run` to run our top level asynchronous function (this may be deprecated in the future for a top level `await`)
 
 <!-- Cover Event Loop
 
