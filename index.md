@@ -55,7 +55,9 @@ Depending on whether you're talking about hardware or software, there are a coup
 
 - **Software/OS Thread** - Your operating system (OS) has it's own abstraction of a "thread". Your OS dispatches "work" to these threads, which in turn are run on hardware threads (the hardware thread can be thought of like the "engine" that the software thread runs on)
 
-Overall, the above is a massive oversimplifcation of what's going on, and I'm sure some hardware guru out there will skewer me for my inaccuracies. Oh well
+<p align="center">
+  <img width="500" height="340" src="assets/threads.png">
+</p>
 
 ### Parallelism
 
@@ -94,6 +96,8 @@ To cut to the chase, the top half of the below diagram illustrates (at a high le
 <p align="center">
   <img width="500" height="340" src="assets/python-concurrency.jpg">
 </p>
+
+ TODO: Make this part flow more naturally
 
 This is due to the fact that, in Python, only one thread can hold the control of the Python interpreter at a time
 
