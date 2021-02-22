@@ -63,7 +63,7 @@ Depending on whether you're talking about hardware or software, there are a coup
 
 This is the idea of performing multiple operations at the same time. Your computer has multiple CPUs and hardware threads, therefore theoretically it can (and does) do multiple things at the same time
 
-The more precise term for spreading work over a computers CPUs is **Multiprocessing**. This type of parallelism is very good in the case where you have a **CPU bound** task, or a task where the time to complete it is mainly derived from the speed at which CPU(s) can process it
+The more precise term for spreading work over a computers CPUs is `Multiprocessing`. This type of parallelism is very good in the case where you have a `CPU bound` task, or a task where the time to complete it is mainly derived from the speed at which CPU(s) can process it
 
 Many machine learning algorithms and other mathematically intensive computations fall in to this category
 
@@ -73,7 +73,7 @@ Concurrency is very similar to parallelism, but with one important distinction. 
 
 Parallelism is concurrency, but not vice versa.
 
-Many modern programming languages embrace concurrency, and it is particularly useful for addressing the inefficiences of **I/O bound** tasks. An I/O (input/output) bound task is one in which the time to complete it is mainly derived from the time spent waiting for some I/O operation to complete. Examples of these are reading from the local file system, making an HTTP request, or waiting on data from a database
+Many modern programming languages embrace concurrency, and it is particularly useful for addressing the inefficiences of `I/O bound` tasks. An I/O (input/output) bound task is one in which the time to complete it is mainly derived from the time spent waiting for some I/O operation to complete. Examples of these are reading from the local file system, making an HTTP request, or waiting on data from a database
 
 Below is a visualization that always helps me differentiate parallelism and concurrency
 
@@ -89,7 +89,7 @@ NOTE: In the interest of time, we'll skip the history and evolution of concurren
 
 ---
 
-## So How Does Python Do Concurrency?
+## So How Does Python (Conceptually) Do Concurrency?
 
 To cut to the chase, the top half of the below diagram illustrates (at a high level) how Python does concurrency
 
@@ -97,7 +97,38 @@ To cut to the chase, the top half of the below diagram illustrates (at a high le
   <img width="500" height="340" src="assets/python-concurrency.jpg">
 </p>
 
- TODO: Make this part flow more naturally
+For every Python process, only one thing can be running at any given time. This is due to the fact that Python has a construct called the `GIL`, or _Global Interpreter Lock_
+
+The reasoning around the existence of the GIL is outside the scope of this talk, but it's contributed both to Python's success and to some of it's current limititations
+
+But what controls what gets to run at any particular time?
+
+Enter the `event loop`. The event loop can be thought of as a constantly running "while" loop that waits for asynchronous operations to return a result and the schedules them to be run by the Python interpreter.
+
+<p align="center">
+  <img width="500" height="340" src="assets/event-loop.png">
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Cover Event Loop
+
+
+Applied Python Concurrency
+
+Get down in to the nitty gritty, this is where code examples start
+
+* Cover coroutines
+* asyncio library
+* async/await
 
 This is due to the fact that, in Python, only one thread can hold the control of the Python interpreter at a time
 
@@ -111,4 +142,4 @@ NOTE: We won't cover legacy asynchronous programming in Python, in the interest 
 
 - Will skip generator based coroutines
 
-- Coroutine is a generator, but a generator is not a coroutine
+- Coroutine is a generator, but a generator is not a coroutine -->
