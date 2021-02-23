@@ -51,7 +51,7 @@ A little better, but what is "parallel programming"? Let's explore some key defi
 
 Depending on whether you're talking about hardware or software, there are a couple different types of "threads". At a high level, we can generalize a thread as something on your computer that can do a unit of computational work.
 
-- **Hardware Thread** - In theory, this is based off of the number of CPUs on your computer (IE, 4 CPUs = 4 hardware threads, or the ability for your computer to do 4 things at once). However, modern CPUs use something called "hyperthreading" so in practice the number of hardware threads is higher than the number of CPUs (this is outside the scope of this talk)
+- **Hardware Thread** - In theory, this is based off of the number of CPUs on your computer (IE, 4 CPUs = 4 hardware threads, or the ability for your computer to do 4 things at once). However, modern CPUs use something called "hyperthreading" so in practice the number of hardware threads is higher than the number of CPUs
 
 - **Software/OS Thread** - Your operating system (OS) has it's own abstraction of a "thread". Your OS dispatches "work" to these threads, which in turn are run on hardware threads (the hardware thread can be thought of like the "engine" that the software thread runs on)
 
@@ -278,4 +278,32 @@ The big takeaway here is that Python can _schedule_ operations concurrently, but
 
 You'll notice the program takes a couple thousandths of a second longer than a second to run. This comes from the overhead of the other parts of the program as well as the time it takes for the event loop to do it's thing. It's still way more performant than the synchronous version.
 
-Notably, the Python asyncio includes a whole lot more with respect to working with concurrency. If interested, check out the docs [here](https://docs.python.org/3/library/asyncio.html) and [here](https://docs.python.org/3/library/asyncio-task.html#coroutines-and-tasks). There's a lot more to concurrency in Python than what is covered here.
+Notably, the Python asyncio includes a whole lot more with respect to working with concurrency.
+
+If interested, check out the docs [here](https://docs.python.org/3/library/asyncio.html) and [here](https://docs.python.org/3/library/asyncio-task.html#coroutines-and-tasks). There's a lot more to concurrency in Python than what is covered here.
+
+# SQLAlchemy
+
+---
+
+Now that we have a basis in applied Python concurrency, let's talk about how it relates to one of the most popular ORMs in the Python ecosystem, [SQLAlchemy](https://www.sqlalchemy.org/).
+
+Notably, native coroutines and the async/await syntax are still in the relatively early phases of adoption in Python. Accordingly, not all libraries are asyncio-compatible.
+
+SQLAlchemy is no exception to this trend. As of right now, the current stable release series of [1.3.x](https://www.sqlalchemy.org/download.html#current) does not have support for asyncio.
+
+However, the current [beta release](https://www.sqlalchemy.org/download.html#beta) and the upcoming major [2.0 release](https://docs.sqlalchemy.org/en/14/changelog/migration_20.html) have/will have full asyncio support.
+
+Today, we'll take a look at some of that preview functionality.
+
+## API Overview
+
+<!-- Create engine
+
+Create models
+
+Read data
+
+Raw SQL
+
+Asyncio version -->
