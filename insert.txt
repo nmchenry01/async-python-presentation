@@ -1,19 +1,4 @@
-CREATE DATABASE IF NOT EXISTS exampledb;
-
-USE exampledb;
-
-CREATE TABLE exampledb.`todo` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL,
-  `description` varchar(10000) NOT NULL,
-  `priority` int(3) NOT NULL,
-
-  PRIMARY KEY (`id`)
-);
-
-
-INSERT INTO exampledb.`todo`(title, description, priority) VALUES
- ("Task 1", "A description of task 1", 1)
+,("Task 1", "A description of task 1", 1)
 ,("Task 2", "A description of task 2", 2)
 ,("Task 3", "A description of task 3", 3)
 ,("Task 4", "A description of task 4", 4)
