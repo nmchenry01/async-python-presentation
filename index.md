@@ -294,7 +294,7 @@ SQLAlchemy is no exception to this trend. As of right now, the current stable re
 
 However, the current [beta release](https://www.sqlalchemy.org/download.html#beta) and the upcoming major [2.0 release](https://docs.sqlalchemy.org/en/14/changelog/migration_20.html) have/will have full asyncio support.
 
-Today, we'll take a look at some of that preview functionality.
+Today, we'll take a look at some of that preview functionality, after going over some basic example usage of the library.
 
 ## API Overview
 
@@ -332,7 +332,7 @@ In the above, we do the following things:
 
 - Test the connection to make sure it's active
 
-Great, we're connected to our databae. 
+Great, we're connected to our database!
 
 From here, we have a couple choices about how to use SQLAlchemy. The two ways we'll cover are the ORM pattern and raw SQL.
 
@@ -356,7 +356,7 @@ mysql_engine = create_engine(
 sql_statement = "SELECT * from exampledb.`todo` limit 3;"
 
 # Connect, execute SQL, and print results
-# NOTE: The "with" statment here is a context manager. It handles close the connection automatically when it falls out of scope
+# NOTE: The "with" statment here is a context manager. It handles closing the connection
 with mysql_engine.begin() as connection:
     results = connection.execute(text(sql_statement)).fetchall()
     
@@ -412,6 +412,8 @@ with session_maker() as session:
 
     print(f"There are {number_of_todos} todo entities in the database")
 ```
+
+## Asynchronous SQLAlchemy
 
 
 <!-- Create engine

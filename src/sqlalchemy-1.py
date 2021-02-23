@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 # Using the synchronous MySQL driver pymysql
 CONNECTION_STRING = "mysql+pymysql://root:example@localhost/exampledb"
@@ -15,7 +15,7 @@ mysql_engine = create_engine(
 connection = mysql_engine.connect()
 
 print(connection)
-connection.execute("Select 1")
+connection.execute(text("Select 1"))
 print(connection.engine)
 
 connection.close()
