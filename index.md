@@ -298,6 +298,42 @@ Today, we'll take a look at some of that preview functionality.
 
 ## API Overview
 
+The first thing we'll do is create an engine with which to interact with out locally running database (I'm using MySQL):
+
+```python
+from sqlalchemy import create_engine
+
+# Using the synchronous MySQL driver pymysql
+CONNECTION_STRING = "mysql+pymysql://root:example@localhost/exampledb"
+
+# Creating a synchronous engine
+mysql_engine = create_engine(
+        CONNECTION_STRING,
+        pool_recycle=3600,
+        pool_size=5,
+        echo=False
+    )
+
+# Test connection
+connection = mysql_engine.connect()
+
+print(connection)
+connection.execute("Select 1")
+print(connection.engine)
+
+connection.close()
+```
+
+In the above, we do the following things:
+
+- Define a connection string with all the info needed to conect to the local MySQL database (we're currently using a synchronous MySQL driver called pymsql)
+
+- Create an "engine" which represents a connection pool we can use to make database calls. This object only needs to be instantiated once in your application
+
+- Test the connection to make sure it's active
+
+
+
 <!-- Create engine
 
 Create models

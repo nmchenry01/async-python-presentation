@@ -13,4 +13,9 @@ mysql_engine = create_engine(
 
 # Test connection
 connection = mysql_engine.connect()
+
+print(connection)
+connection.execute("Select 1")
+print(connection.engine)
+
 connection.close()
