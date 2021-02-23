@@ -332,6 +332,86 @@ In the above, we do the following things:
 
 - Test the connection to make sure it's active
 
+Great, we're connected to our databae. 
+
+From here, we have a couple choices about how to use SQLAlchemy. The two ways we'll cover are the ORM pattern and raw SQL.
+
+Starting with raw SQL, we can simply pass a MySQL compatible SQL statement to a connection directly:
+
+```python
+from sqlalchemy import create_engine, text
+from pprint import pprint
+
+# Using the synchronous MySQL driver pymysql
+CONNECTION_STRING = "mysql+pymysql://root:example@localhost/exampledb"
+
+# Creating a synchronous engine
+mysql_engine = create_engine(
+        CONNECTION_STRING,
+        pool_recycle=3600,
+        pool_size=5,
+        echo=False
+    )
+
+sql_statement = "SELECT * from exampledb.`todo` limit 3;"
+
+# Connect, execute SQL, and print results
+# NOTE: The "with" statment here is a context manager. It handles close the connection automatically when it falls out of scope
+with mysql_engine.begin() as connection:
+    results = connection.execute(text(sql_statement)).fetchall()
+    
+    pprint(results)
+```
+
+So the above executes a simple SQL statement and returns the results. This style of SQLAlchemy usage is useful for applications where writing custom SQL is necessary, either due to the complexity of queries or other business rationales.
+
+However, for most use cases, using the ORM style query API is more intuitive:
+
+```python
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
+# Using the synchronous MySQL driver pymysql
+CONNECTION_STRING = "mysql+pymysql://root:example@localhost/exampledb"
+
+# Creating a synchronous engine
+mysql_engine = create_engine(
+        CONNECTION_STRING,
+        pool_recycle=3600,
+        pool_size=5,
+        echo=False
+    )
+
+# Generate sessions, which manage persistence for ORM-mapped objects
+session_maker = sessionmaker(bind=mysql_engine)
+
+# Create an object mapping to the database schema
+Base = declarative_base()
+
+class Todo(Base):
+    __tablename__ = 'todo'
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    description = Column(String)
+    priority = Column(Integer)
+
+# Select 3 entities
+with session_maker() as session:
+    todos = session.query(Todo).limit(3).all()
+
+    for todo in todos:
+        print(f"A todo with id {todo.id} and priority {todo.priority}")
+
+print("\n")
+
+# Find the total number of entities in the DB
+with session_maker() as session:
+    number_of_todos = session.query(Todo).count()
+
+    print(f"There are {number_of_todos} todo entities in the database")
+```
 
 
 <!-- Create engine
