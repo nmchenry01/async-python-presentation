@@ -359,7 +359,7 @@ sql_statement = "SELECT * from exampledb.`todo` limit 3;"
 # NOTE: The "with" statment here is a context manager. It handles closing the connection
 with mysql_engine.begin() as connection:
     results = connection.execute(text(sql_statement)).fetchall()
-    
+
     pprint(results)
 ```
 
@@ -415,13 +415,104 @@ with session_maker() as session:
 
 ## Asynchronous SQLAlchemy
 
+All of the operations performed above were synchronous. Now let's see what we need to do to make them asynchronous.
 
-<!-- Create engine
+Notably, as of the current beta release of SQLAlchemy, the library supports a **`create_async_engine`** function that supports asyncio. However, you've also got to make sure you're using an asyncio-compatible database driver.
 
-Create models
+In our case, we're going from **`pymsql`** to **`aiomysql`** (both drivers for MySQL).
 
-Read data
+We'll first start by simulating a series of reads against our local MySQL database instance:
 
-Raw SQL
+```python
+from sqlalchemy import create_engine, text
+import time
+from datetime import datetime
 
-Asyncio version -->
+# Using the synchronous MySQL driver pymysql
+CONNECTION_STRING = "mysql+pymysql://root:example@localhost/exampledb"
+
+# Creating a synchronous engine
+mysql_engine = create_engine(
+        CONNECTION_STRING,
+        pool_recycle=3600,
+        pool_size=5,
+        echo=False
+    )
+
+sql_statement = "SELECT * from exampledb.`todo`;"
+
+def some_big_read_operation():
+    print(f"I started at {datetime.now()}\n")
+    with mysql_engine.begin() as connection:
+        connection.execute(text(sql_statement)).fetchall()
+
+# Reading 20k rows each time
+some_big_read_operation()
+
+# Now do it 10 times and time it
+start = time.perf_counter()
+for _ in range(10):
+    some_big_read_operation()
+end = time.perf_counter()
+
+print(f"It took {end - start} seconds to read a boatload of data")
+```
+
+In the above, we can see the following:
+
+- It takes about 2 seconds to read all the data
+
+- The database calls occur one after the other (sequentially)
+
+Now let's look at the async version:
+
+```python
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import create_async_engine
+import asyncio
+import time
+from datetime import datetime
+
+
+async def main():
+    # Using the async MySQL driver aiomysql
+    CONNECTION_STRING = "mysql+aiomysql://root:example@localhost/exampledb"
+
+    # Creating an async engine
+    async_mysql_engine = create_async_engine(
+        CONNECTION_STRING,
+        pool_recycle=3600,
+        pool_size=10,
+        echo=False
+    )
+
+    sql_statement = "SELECT * from exampledb.`todo`;"
+
+    # Async version of big read operation
+    async def some_big_read_operation():
+        print(f"I started at {datetime.now()}\n")
+        async with async_mysql_engine.connect() as connection:
+            await connection.execute(text(sql_statement))
+
+    # Now do it 10 times and time it
+    coroutine_list = [some_big_read_operation() for _ in range(10)]
+
+    start = time.perf_counter()
+    await asyncio.gather(*coroutine_list)
+    end = time.perf_counter()
+    print(f"It took {end - start} seconds to read a boatload of data")
+
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
+What do you know, the async version also takes about 2 seconds to run...
+
+In this case, the takeaways are as follows:
+
+- The read operations are all scheduled at (roughly) the same time, but are only as fast as the slowest one to return a value
+
+- Asynchronous operations are complex, and are not always the most performant. Oftentimes, the bottleneck on speed/performance exists outside of your code (in this case, it's likely the tiny MySQL instance running on my local machine)
+
+- Write code that does what you need it to do, then optimize it to make it go faster as needed. Perform experiments, and iterate
