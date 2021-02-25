@@ -302,7 +302,7 @@ Today, we'll take a look at some of that preview functionality, after going over
 
 ## API Overview
 
-The first thing we'll do is create an engine with which to interact with out locally running database (I'm using MySQL):
+The first thing we'll do is create an engine with which to interact with our locally running database (I'm using MySQL):
 
 ```python
 from sqlalchemy import create_engine
