@@ -43,7 +43,9 @@ I find the following definition a little more pragmatic:
 
 > Asynchronous programming is a form of parallel programming that allows a unit of work to run separately from the primary application thread
 
-A little better, but what is "parallel programming"? Let's explore some key definitions we'll need to talk meaningfully about asynchronous programming.
+A little better, but what is "parallel programming"? 
+
+Let's explore some key definitions we'll need to talk meaningfully about asynchronous programming.
 
 ## Key Concepts
 
@@ -73,7 +75,9 @@ Concurrency is very similar to parallelism, but with one important distinction. 
 
 Parallelism is concurrency, but not vice versa.
 
-Many modern programming languages embrace concurrency, and it is particularly useful for addressing the inefficiences of **`I/O bound`** tasks. An I/O (input/output) bound task is one in which the time to complete it is mainly derived from the time spent waiting for some I/O operation to complete. Examples of these are reading from the local file system, making an HTTP request, or waiting on data from a database.
+Many modern programming languages embrace concurrency, and it is particularly useful for addressing the inefficiences of **`I/O bound`** tasks. An I/O (input/output) bound task is one in which the time to complete it is mainly derived from the time spent waiting for some I/O operation to complete. 
+
+Examples of these are reading from the local file system, making an HTTP request, or waiting on data from a database.
 
 Below is a visualization that always helps me differentiate parallelism and concurrency:
 
@@ -363,7 +367,9 @@ with mysql_engine.begin() as connection:
     pprint(results)
 ```
 
-So the above executes a simple SQL statement and returns the results. This style of SQLAlchemy usage is useful for applications where writing custom SQL is necessary, either due to the complexity of queries or other business rationales.
+So the above executes a simple SQL statement and returns the results. 
+
+This style of SQLAlchemy usage is useful for applications where writing custom SQL is necessary, either due to the complexity of queries or other business rationales.
 
 However, for most use cases, using the ORM style query API is more intuitive:
 
